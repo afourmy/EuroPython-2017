@@ -13,6 +13,6 @@ def do_something(job, host, conn):
     conn.send("enable\r")
     conn.app_authorize(account)
     conn.execute('conf t')
-    conn.execute('ip domain name http://google.fr')
+    conn.execute('hostname france')
 
-start([account], [host], do_something)
+start([account], [host], do_something, max_threads=1)
