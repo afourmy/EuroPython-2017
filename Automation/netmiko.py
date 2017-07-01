@@ -2,7 +2,7 @@ from netmiko import ConnectHandler
 
 connection_parameters = {
     'device_type': 'cisco_ios',
-    'ip':   '192.168.1.89',
+    'ip':   '192.168.1.88',
     # credentials to log in to the device
     'username': 'cisco',
     'password': 'cisco',
@@ -17,8 +17,8 @@ net_connect = ConnectHandler(**connection_parameters)
 net_connect.enable()
 
 # display the configuration of the device
-output = net_connect.send_command('show running-config')
-print(output)
+# output = net_connect.send_command('show running-config')
+# print(output)
 
 # change the name of the device
 output = net_connect.send_config_set('hostname no')
