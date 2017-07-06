@@ -2,19 +2,20 @@ from Exscript import Host, Account
 from Exscript.protocols import SSH2
 from Exscript.util.start import start
 
-# IP of the device + credentials
-account = Account('cisco', 'cisco')
-host = Host('ssh://192.168.1.88')
-host.set_account(account)
-
+hosts = []
+for ip in ('192.168.1.88', '192.168.1.88'):
+    account = Account('cisco', 'cisco')
+    host = Host('ssh://{host_ip}'.format(host_ip=ip))
+    host.set_account(account)
+    hosts.append(host)
+    
 conn = SSH2()
 
 def do_something(job, host, conn):
     conn.execute('terminal length 0')
     conn.send("enable\r")
     conn.app_authorize(account)
-    conn.execute('show running-config')
     conn.execute('configure terminal')
-    conn.execute('hostname france')
+    conn.execute('hostname router2')
 
-start([account], [host], do_something)
+start([account], hosts, do_something, max_threads=5)

@@ -17,9 +17,9 @@ net_connect = ConnectHandler(**connection_parameters)
 net_connect.enable()
 
 # display the configuration of the device
-# output = net_connect.send_command('show running-config')
-# print(output)
+config = net_connect.send_command('show running-config')
 
 # change the name of the device
-output = net_connect.send_config_set('hostname no')
+add_description_to_interface = ['interface Fa0/0', 'description OSPF interface']
+net_connect.send_config_set(add_description_to_interface)
 net_connect.disconnect()
